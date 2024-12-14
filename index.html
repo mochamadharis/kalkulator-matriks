@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Calculator 2x2</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 360px;
+            text-align: center;
+        }
+
+        .calculator h3 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4a4a4a;
+            margin-bottom: 15px;
+        }
+
+        .matrix {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .matrix input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s;
+            background: #f9f9f9;
+        }
+
+        .matrix input:focus {
+            border-color: #ff9a9e;
+            outline: none;
+            background: #ffe4e6;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(to right, #f857a6, #ff5858);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fdfdfd;
+            border-radius: 10px;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .result h4 {
+            font-size: 18px;
+            color: #4a4a4a;
+            margin-bottom: 8px;
+        }
+
+        .result .matrix {
+            gap: 10px;
+        }
+
+        .result .matrix input {
+            background: #eff0f3;
+            border: none;
+            color: #333;
+            font-weight: bold;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h3>KALKULATOR MATRIKS HARIS</h3>
+
+        <h4>MATRIKS A</h4>
+        <div class="matrix">
+            <input type="number" id="a11" placeholder="0">
+            <input type="number" id="a12" placeholder="0">
+        </div>
+        <div class="matrix">
+            <input type="number" id="a21" placeholder="0">
+            <input type="number" id="a22" placeholder="0">
+        </div>
+
+        <h4>MATRIKS B</h4>
+        <div class="matrix">
+            <input type="number" id="b11" placeholder="0">
+            <input type="number" id="b12" placeholder="0">
+        </div>
+        <div class="matrix">
+            <input type="number" id="b21" placeholder="0">
+            <input type="number" id="b22" placeholder="0">
+        </div>
+
+        <button onclick="calculate('add')">+</button>
+        <button onclick="calculate('subtract')">-</button>
+        <button onclick="calculate('multiply')">*</button>
+
+        <div class="result">
+            <h4>Result</h4>
+            <div class="matrix">
+                <input type="text" id="r11" readonly value="0">
+                <input type="text" id="r12" readonly value="0">
+            </div>
+            <div class="matrix">
+                <input type="text" id="r21" readonly value="0">
+                <input type="text" id="r22" readonly value="0">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate(operation) {
+            const a11 = parseFloat(document.getElementById('a11').value) || 0;
+            const a12 = parseFloat(document.getElementById('a12').value) || 0;
+            const a21 = parseFloat(document.getElementById('a21').value) || 0;
+            const a22 = parseFloat(document.getElementById('a22').value) || 0;
+
+            const b11 = parseFloat(document.getElementById('b11').value) || 0;
+            const b12 = parseFloat(document.getElementById('b12').value) || 0;
+            const b21 = parseFloat(document.getElementById('b21').value) || 0;
+            const b22 = parseFloat(document.getElementById('b22').value) || 0;
+
+            let r11, r12, r21, r22;
+
+            if (operation === 'add') {
+                r11 = a11 + b11;
+                r12 = a12 + b12;
+                r21 = a21 + b21;
+                r22 = a22 + b22;
+            } else if (operation === 'subtract') {
+                r11 = a11 - b11;
+                r12 = a12 - b12;
+                r21 = a21 - b21;
+                r22 = a22 - b22;
+            } else if (operation === 'multiply') {
+                r11 = a11 * b11 + a12 * b21;
+                r12 = a11 * b12 + a12 * b22;
+                r21 = a21 * b11 + a22 * b21;
+                r22 = a21 * b12 + a22 * b22;
+            }
+
+            document.getElementById('r11').value = r11;
+            document.getElementById('r12').value = r12;
+            document.getElementById('r21').value = r21;
+            document.getElementById('r22').value = r22;
+        }
+    </script>
+</body>
+</html>
